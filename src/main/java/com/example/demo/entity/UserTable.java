@@ -17,10 +17,15 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+//import lombok.Builder;
+//import lombok.Data;
+
 /**
  *
  * @author oleg
  */
+//@Data
+//@Builder
 @Entity
 @Table(name = "user_table")
 @XmlRootElement
