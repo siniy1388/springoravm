@@ -10,6 +10,7 @@
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/controller/UsersController.java
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/service/UserVmService.java
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/sshservice/sshCommand.java
+/home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/security/SecurityConfig.java
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/repository/UsersRepository.java
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/dto/UserVmDto.java
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/repository/UserVmRepository.java

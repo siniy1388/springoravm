@@ -15,5 +15,7 @@ com/example/demo/DemoApplication.class
 com/example/demo/dto/UserVmDto$UserVmDtoBuilder.class
 com/example/demo/entity/UserTable_.class
 com/example/demo/repository/UserVmRepository.class
+com/example/security/SecurityConfig$AuthenticationConfiguration.class
 com/example/demo/dto/UsersDto$UsersDtoBuilder.class
 com/example/demo/exception/ValidationException.class
+com/example/security/SecurityConfig.class
