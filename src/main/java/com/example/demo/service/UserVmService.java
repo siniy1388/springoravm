@@ -14,12 +14,12 @@ import java.util.List;
  */
 public interface UserVmService {
     
-    UserVmDto saveUser(UserVmDto userVmDto);
+    //UserVmDto saveUser(UserVmDto userVmDto);
 
-    UserVmDto findByUser(String user);
+    UserVmDto findByUser(String name);
     
-    UserVmDto findByVmName(String vmname);
+    UserVmDto findByVmName(String name);
 
-    List<UserVmDto> findAll();
+    List<UserVmDto> findAllVm();
     
 }

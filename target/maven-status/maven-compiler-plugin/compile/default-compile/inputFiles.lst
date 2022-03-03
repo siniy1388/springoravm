@@ -1,11 +1,13 @@
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/DemoApplication.java
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/dto/UsersDto.java
+/home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/exceptions/IllegalOrphanException.java
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/entity/UserVm.java
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/entity/UserTable.java
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/service/DefaultUsersService.java
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/service/UserVmConverter.java
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/service/UsersConverter.java
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/service/UsersService.java
+/home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/controller/UserVmController.java
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/exception/ValidationException.java
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/controller/UsersController.java
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/service/UserVmService.java
@@ -13,4 +15,7 @@
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/security/SecurityConfig.java
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/repository/UsersRepository.java
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/dto/UserVmDto.java
+/home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/exceptions/PreexistingEntityException.java
+/home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/exceptions/NonexistentEntityException.java
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/repository/UserVmRepository.java
+/home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/service/DefaultUserVmService.java

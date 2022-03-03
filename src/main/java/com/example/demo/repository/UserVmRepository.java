@@ -12,5 +12,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author oleg
  */
 public interface UserVmRepository extends JpaRepository<UserVm, Integer>{
-    UserVm findByUserid(String userid);
+    UserVm findByName(String user);
 }

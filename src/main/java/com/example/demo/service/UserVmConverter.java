@@ -32,6 +32,7 @@ public class UserVmConverter {
                 .cdvm(uservm.getCdvm())
                 .cdvmSystem(uservm.getCdvmSystem())
                 .name(uservm.getName())
+                .namevm(uservm.getNameVm())
                 .build();
     }
     
