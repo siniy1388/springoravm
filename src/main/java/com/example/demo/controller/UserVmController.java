@@ -23,7 +23,7 @@ import com.example.demo.service.UserVmService;
  * @author oleg
  */
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/usersvm")
 @AllArgsConstructor
 @Log
 public class UserVmController {

@@ -23,12 +23,7 @@ public class UsersConverter {
         users.setName(usersDto.getName());
         users.setLogin(usersDto.getLogin());
         return users;
-//        return UserTable.builder()
-//                .id(usersDto.getId())
-//                .name(usersDto.getName())
-//                .login(usersDto.getLogin())
-//                .email(usersDto.getEmail())
-//                .build();
+
     }
     
     public UsersDto fromUserToUserDto(UserTable users) {

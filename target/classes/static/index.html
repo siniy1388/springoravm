@@ -25,7 +25,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
-                var users = JSON.parse(this.responseText);
+                var uservm = JSON.parse(this.responseText);
                 var html = '<tr>\n' +
                     '        <th>User id</th>\n' +
                     '        <th>User name</th>\n' +
@@ -33,20 +33,20 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     '        <th>User email</th>\n' +
                     '        <th>Delete</th>\n' +
                     '    </tr>';
-                for (var i = 0; i < users.length; i++) {
-                    var user = users[i];
+                for (var i = 0; i < uservm.length; i++) {
+                    var user = uservm[i];
                     console.log(user);
                     html = html + '<tr><td>' + user.id + '</td>\n' +
                         '        <td>' + user.name + '</td>\n' +
-                        '        <td>' + user.login + '</td>\n' +
-                        '        <td>' + user.email + '</td>' +
+                        '        <td>' + user.namevm + '</td>\n' +
+                        '        <td>' + user.cdvmSystem + '</td>' +
                         '        <td><button onclick="deleteUser(' + user.id + ')">Delete</button></td></tr>';
 
                 }
                 document.getElementById("usersList").innerHTML = html;
             }
                 };
-                xhttp.open("GET", "http://localhost:8080/users/findAll", true);
+                xhttp.open("GET", "http://localhost:8080/usersvm/findAllVm", true);
                 xhttp.send();
             }
 
