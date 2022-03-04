@@ -12,6 +12,7 @@ com/example/demo/entity/UserTable_.class
 com/example/demo/repository/UserVmRepository.class
 com/example/security/SecurityConfig$AuthenticationConfiguration.class
 com/example/demo/dto/UsersDto$UsersDtoBuilder.class
+.netbeans_automatic_build
 com/example/demo/service/UsersConverter.class
 com/example/demo/exceptions/PreexistingEntityException.class
 com/example/demo/service/UsersService.class

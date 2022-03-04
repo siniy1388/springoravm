@@ -38,9 +38,9 @@ public class UserVmController {
 //    }
 
     @GetMapping("/findAllVm")
-    public List<UserVmDto> findAllUsers() {
+    public List<UserVmDto> findAll() {
         log.info("Handling find all usersvm request");
-        return userVmService.findAllVm();
+        return userVmService.findAll();
     }
 
     @GetMapping("/findByUser")

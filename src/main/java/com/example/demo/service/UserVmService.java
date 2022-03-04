@@ -20,6 +20,6 @@ public interface UserVmService {
     
     UserVmDto findByVmName(String name);
 
-    List<UserVmDto> findAllVm();
+    List<UserVmDto> findAll();
     
 }

@@ -45,7 +45,7 @@ public class DefaultUserVmService implements UserVmService {
     }
 
     @Override
-    public List<UserVmDto> findAllVm() {
+    public List<UserVmDto> findAll() {
         return userVmRepository.findAll()
                 .stream()
                 .map(userVmConverter::fromUserToUserDto)
