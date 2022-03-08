@@ -18,7 +18,7 @@ public class UserVmConverter {
     
     public UserVm fromUserDtoToUser(UserVmDto userVmDto) {
         UserVm uservm = new UserVm();
-        uservm.setId(userVmDto.getId());
+//        uservm.setId(userVmDto.getId());
         uservm.setCdvm(userVmDto.getCdvm());
         uservm.setNameVm(userVmDto.getNamevm());
         uservm.setName(userVmDto.getName());
@@ -28,7 +28,7 @@ public class UserVmConverter {
     
     public UserVmDto fromUserToUserDto(UserVm uservm) {
         return UserVmDto.builder()
-                .id(uservm.getId())
+//                .id(uservm.getId())
                 .cdvm(uservm.getCdvm())
                 .cdvmSystem(uservm.getCdvmSystem())
                 .name(uservm.getName())

@@ -14,7 +14,7 @@ import lombok.Data;
 @Data
 @Builder
 public class UserVmDto {
-    private Long id;
+//    private Long id;
     private String name;
     private String namevm;
     private String cdvmSystem;

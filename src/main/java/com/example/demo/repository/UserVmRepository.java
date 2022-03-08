@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package com.example.demo.repository;
+import com.example.demo.dto.UserVmDto;
 import com.example.demo.entity.UserVm;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -13,4 +15,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface UserVmRepository extends JpaRepository<UserVm, Integer>{
     UserVm findByName(String user);
+    
+    @Override
+    List<UserVm> findAll();
+    
 }
