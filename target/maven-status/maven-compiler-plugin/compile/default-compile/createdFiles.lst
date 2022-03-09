@@ -5,6 +5,7 @@ com/example/demo/entity/UserTable.class
 com/example/demo/dto/UserVmDto.class
 com/example/demo/service/CommandsService.class
 com/example/demo/controller/exceptions/PreexistingEntityException.class
+com/example/demo/controller/CommandsController.class
 com/example/demo/dto/CommandsDto$CommandsDtoBuilder.class
 com/example/demo/service/UserVmService.class
 com/example/demo/service/CommandsConverter.class
@@ -33,4 +34,5 @@ com/example/demo/dto/UserVmDto$UserVmDtoBuilder.class
 com/example/demo/exception/ValidationException.class
 com/example/demo/exceptions/IllegalOrphanException.class
 com/example/security/SecurityConfig.class
+com/example/demo/service/DefaultCommandsService.class
 com/example/demo/exceptions/NonexistentEntityException.class
