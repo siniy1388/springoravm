@@ -12,12 +12,15 @@
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/service/DefaultUserVmService.java
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/controller/exceptions/NonexistentEntityException.java
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/controller/CommandsController.java
+/home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/repository/RolesRepository.java
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/dto/UsersDto.java
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/entity/UserVm.java
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/entity/UserTable.java
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/repository/CommandsRepository.java
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/service/UserVmConverter.java
+/home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/entity/Roles.java
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/service/UsersConverter.java
+/home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/dto/RolesDto.java
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/service/CommandsService.java
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/service/UsersService.java
 /home/oleg/Project/java/InitializrSpringbootProject1/src/main/java/com/example/demo/controller/UserVmController.java
