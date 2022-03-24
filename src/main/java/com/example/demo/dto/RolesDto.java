@@ -9,4 +9,5 @@ public class RolesDto implements Serializable {
     private final Long id;
     private final String roleNm;
     private final String roleRus;
+    
 }
