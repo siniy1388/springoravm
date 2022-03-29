@@ -1,27 +1,121 @@
-<!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>
-            <button ><a href="http://localhost:8080/pgusers.html">Управление пользователями</a>
-            </button>
-        </div>
-        <div>
-            <h2>Управление пользователями</h2>
-            <table id="usersList">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>VM Manager</title>
+<style>
+body {font-family: Arial;}
 
-            </table>
-        </div>
-        <script>
-            function loadUsers() {
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+.div_inline {
+ display:inline-block;
+}
+
+.div_inline img {
+ display:block;
+}
+.table_style {
+    border: 1px solid;
+    width:30%; 
+    height:30%
+}
+</style>
+</head>
+
+<body>
+
+<!-- Tab links -->
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'Servers')">Servers and VMs</button>
+  <button class="tablinks" onclick="openCity(event, 'Repos')">Repositories</button>
+  <button class="tablinks" onclick="openCity(event, 'Network')">Networking</button>
+  <button class="tablinks" onclick="openCity(event, 'Storage')">Storage</button>
+</div>
+
+<!-- Tab content -->
+<div id="Servers" class="tabcontent">
+  <h3>Servers and VMs</h3>
+  <div>
+   <div class="div_inline">
+    <table id="vmList" style="table_style"> </table>
+   </div>
+  <!--<input name="parentList" type="text" style="width:30%; height:200px" value="" size="1" />-->
+  <div class="div_inline">
+    <table id="usersList" style="table_style"></table>
+  </div>
+</div>
+</div>
+
+<div id="Repos" class="tabcontent">
+  <h3>Repositories</h3>
+  <div>
+  <table id="vmsList" style="width:30%; height:40%"> </table>
+  <input name="parentList" type="text" style="width:30%; height:200px" value="" size="1" />
+  <input name="childList" type="text" style="width:60%; height:200px" value="" size="1" />
+</div>
+</div>
+
+<div id="Network" class="tabcontent">
+  <h3>Networking</h3>
+  <p>Tokyo is the capital of Japan.</p>
+</div>
+
+<div id="Storage" class="tabcontent">
+  <h3>Storage</h3>
+  <p>StorageStorageStorageStorageStorage.</p>
+</div>
+
+<script>
+function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+function loadCommands() {
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
                 if (this.readyState === 4 && this.status === 200) {
@@ -43,14 +137,46 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         '        <td><button onclick="deleteUser(' + user.id + ')">Delete</button></td></tr>';
 
                 }
-                document.getElementById("usersList").innerHTML = html;
+                document.getElementById("vmList").innerHTML = html;
             }
                 };
                 xhttp.open("GET", "http://localhost:8080/commands/findAll", true);
                 xhttp.send();
             }
 
-            loadUsers();
-        </script>
-    </body>
+            loadCommands();
+
+function loadUsers() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var users = JSON.parse(this.responseText);
+                var html = '<tr>\n' +
+                    '        <th>User id</th>\n' +
+                    '        <th>User name</th>\n' +
+                    '        <th>User login</th>\n' +
+                    '        <th>User email</th>\n' +
+                    '        <th>Delete</th>\n' +
+                    '    </tr>';
+                for (var i = 0; i < users.length; i++) {
+                    var user = users[i];
+                    console.log(user);
+                    html = html + '<tr><td>' + user.id + '</td>\n' +
+                        '        <td>' + user.name + '</td>\n' +
+                        '        <td>' + user.login + '</td>\n' +
+                        '        <td>' + user.email + '</td>' +
+                        '        <td><button onclick="deleteUser(' + user.id + ')">Delete</button></td></tr>';
+
+                }
+                document.getElementById("usersList").innerHTML = html;
+            }
+        };
+        xhttp.open("GET", "http://localhost:8080/users/findAll", true);
+        xhttp.send();
+    }
+
+    loadUsers();
+    
+</script>
+</body>
 </html>

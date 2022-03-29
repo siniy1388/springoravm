@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <button ><a href="http://localhost:8080/pgusers.html">Управление пользователями</a>
+            </button>
+        </div>
+        <div>
+            <h2>Управление пользователями</h2>
+            <table id="usersList">
+
+            </table>
+        </div>
+        <script>
+            function loadUsers() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                var uservm = JSON.parse(this.responseText);
+                var html = '<tr>\n' + 
+                    '        <th>id</th>\n' +
+                    '        <th>groop</th>\n' +
+                    '        <th>command</th>\n' +
+                    '        <th>nameR</th>\n' +
+                    '        <th>Delete</th>\n' +
+                    '    </tr>';
+                for (var i = 0; i < uservm.length; i++) {
+                    var user = uservm[i];
+                    console.log(user);
+                    html = html + '<tr><td>' + user.id+ '</td>\n' +
+                        '       <td>' + user.groop+ '</td>\n' +
+                        '        <td>' + user.command + '</td>\n' +
+                        '        <td>' + user.namer + '</td>' +
+                        '        <td><button onclick="deleteUser(' + user.id + ')">Delete</button></td></tr>';
+
+                }
+                document.getElementById("usersList").innerHTML = html;
+            }
+                };
+                xhttp.open("GET", "http://localhost:8080/commands/findAll", true);
+                xhttp.send();
+            }
+
+            loadUsers();
+        </script>
+    </body>
+</html>
