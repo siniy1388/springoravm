@@ -16,22 +16,25 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserVmConverter {
     
-    public UserVm fromUserDtoToUser(UserVmDto userVmDto) {
+    public UserVm fromUserDtoVmToUserVm(UserVmDto userVmDto) {
         UserVm uservm = new UserVm();
-        uservm.setCdvm(userVmDto.getCdvm());
-        uservm.setNameVm(userVmDto.getNamevm());
-        uservm.setName(userVmDto.getName());
-        uservm.setUserid(userVmDto.getUserid());
         uservm.setId(userVmDto.getId());
+        uservm.setName(userVmDto.getName());
+        uservm.setNameVm(userVmDto.getNamevm());
+        uservm.setCdvmSystem(userVmDto.getCdvmSystem());
+        uservm.setUserid(userVmDto.getUserid());
+        uservm.setCdvm(userVmDto.getCdvm());
         return uservm;
     }
     
-    public UserVmDto fromUserToUserDto(UserVm uservm) {
+    public UserVmDto fromUserVmToUserDtoVm(UserVm uservm) {
         return UserVmDto.builder()
                 .id(uservm.getId())
-                .cdvm(uservm.getCdvm())
-                .cdvmSystem(uservm.getCdvmSystem())
                 .name(uservm.getName())
+                .namevm(uservm.getNameVm())
+                .cdvmSystem(uservm.getCdvmSystem())
+                .userid(uservm.getUserid())
+                .cdvm(uservm.getCdvm())
                 .build();
     }
     

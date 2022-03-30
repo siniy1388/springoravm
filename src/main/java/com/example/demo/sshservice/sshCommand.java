@@ -60,7 +60,7 @@ public class sshCommand {
        }
    }
 
-    public void executeCmd(String command) throws JSchException, IOException {
+    public StringBuilder executeCmd(String command) throws JSchException, IOException {
        BufferedReader reader = null;
        Channel channel = null;
        channel = session.openChannel("exec");
@@ -72,18 +72,18 @@ public class sshCommand {
        
        reader = new BufferedReader(new InputStreamReader(in,
                Charset.forName(charset)));
-       String buf = null;
+       String buf;
        System.out.println("OutPutResult:"+"\n");
-       StringBuffer buffer = new StringBuffer();
+       StringBuilder buffer = new StringBuilder();
        while ((buf = reader.readLine()) != null) {
            System.out.println(buf);
            buffer.append(buf);
            buffer.append("\n");
        }
-       System.out.println("**********************************");
-               // Результат теста может быть возвращен для регулярного сопоставления для логической оценки
-       System.out.println("ReturnResult:"+"\n"+buffer.toString());
+//       System.out.println("**********************************");
+//       System.out.println("ReturnResult:"+"\n"+buffer.toString());
        channel.disconnect();
+        return buffer;
    }
 
 		

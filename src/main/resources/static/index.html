@@ -75,18 +75,23 @@ body {font-family: Arial;}
     <table id="vmList" style="table_style"> </table>
    </div>
   <!--<input name="parentList" type="text" style="width:30%; height:200px" value="" size="1" />-->
-  <div class="div_inline">
+<!--  <div class="div_inline">
     <table id="usersList" style="table_style"></table>
-  </div>
+  </div>-->
 </div>
 </div>
 
 <div id="Repos" class="tabcontent">
   <h3>Repositories</h3>
   <div>
-  <table id="vmsList" style="width:30%; height:40%"> </table>
-  <input name="parentList" type="text" style="width:30%; height:200px" value="" size="1" />
-  <input name="childList" type="text" style="width:60%; height:200px" value="" size="1" />
+<!--  <table id="vmsList" style="width:30%; height:40%"> </table>-->
+  <div class="div_inline">
+    <table id="vmsList" style="table_style"> </table>
+   </div>
+  <!--<input name="parentList" type="text" style="width:30%; height:200px" value="" size="1" />-->
+  <div class="div_inline">
+    <table id="usersList" style="table_style"></table>
+  </div>
 </div>
 </div>
 
@@ -176,6 +181,41 @@ function loadUsers() {
     }
 
     loadUsers();
+    
+function loadVms() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var usersvm = JSON.parse(this.responseText);
+                var html = '<tr>\n' +
+                    '        <th>UserVm id</th>\n' +
+                    '        <th>UserVm name</th>\n' +
+                    '        <th>UserVm nameVm</th>\n' +
+                    '        <th>UserVm cdVmSys</th>\n' +
+                    '        <th>UserVm userid</th>\n' +
+                    '        <th>UserVm cdvm</th>\n' +
+                    '        <th>Delete</th>\n' +
+                    '    </tr>';
+                for (var i = 0; i < users.length; i++) {
+                    var uservm = usersvm[i];
+                    console.log(uservm);
+                    html = html + '<tr><td>' + uservm.name + '</td>\n' +
+                        '        <td>' + uservm.name + '</td>\n' +
+                        '        <td>' + uservm.namevm + '</td>\n' +
+                        '        <td>' + uservm.cdvmSystem + '</td>' +
+                        '        <td>' + uservm.userid + '</td>' +
+                        '        <td>' + uservm.cdvm + '</td>' +
+                        '        <td><button onclick="deleteUser(' + uservm.id + ')">Delete</button></td></tr>';
+
+                }
+                document.getElementById("vmsList").innerHTML = html;
+            }
+        };
+        xhttp.open("GET", "http://localhost:8080/usersvm/findAllVm", true);
+        xhttp.send();
+    }
+
+    loadVms();    
     
 </script>
 </body>

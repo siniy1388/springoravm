@@ -6,6 +6,7 @@
 package com.example.demo.entity;
 
 import java.io.Serializable;
+import javax.annotation.concurrent.Immutable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -19,6 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author oleg
  */
 @Entity
+@Immutable
 @Table(name = "user_vm")
 @XmlRootElement
 @NamedQueries({ 
@@ -31,6 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class UserVm implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Column(name = "name")
     private String name;
     @Column(name = "name_vm")
