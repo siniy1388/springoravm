@@ -33,14 +33,7 @@ public class DefaultUsersService implements UsersService {
 
     @Override
     public UsersDto saveUser(UsersDto usersDto) {
-        String command = "list vm";
-        StringBuilder ressh;
-        try{
-            sshCommand cmnd = new sshCommand("admin","Bratsk1388","192.168.0.11",10000);
-            ressh = cmnd.executeCmd(command);
-        } catch(Exception ex) {
-            Logger.getLogger(DefaultUsersService.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
         try {
             validateUserDto(usersDto);
         } catch (ValidationException ex) {

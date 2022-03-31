@@ -68,16 +68,17 @@ body {font-family: Arial;}
 </div>
 
 <!-- Tab content -->
-<div id="Servers" class="tabcontent">
+<div id="serverList" class="tabcontent">
   <h3>Servers and VMs</h3>
   <div>
    <div class="div_inline">
-    <table id="vmList" style="table_style"> </table>
+    <!--<table id="vmList" style="table_style"> </table>-->
+    <table id="servList" style="table_style"> </table>
    </div>
   <!--<input name="parentList" type="text" style="width:30%; height:200px" value="" size="1" />-->
-<!--  <div class="div_inline">
+  <div class="div_inline">
     <table id="usersList" style="table_style"></table>
-  </div>-->
+  </div>
 </div>
 </div>
 
@@ -89,9 +90,9 @@ body {font-family: Arial;}
     <table id="vmsList" style="table_style"> </table>
    </div>
   <!--<input name="parentList" type="text" style="width:30%; height:200px" value="" size="1" />-->
-  <div class="div_inline">
+<!--  <div class="div_inline">
     <table id="usersList" style="table_style"></table>
-  </div>
+  </div>-->
 </div>
 </div>
 
@@ -216,6 +217,33 @@ function loadVms() {
     }
 
     loadVms();    
+    
+    function loadServ() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var servers = JSON.parse(this.responseText);
+                var html = '<tr>\n' +
+                    '        <th>Server id</th>\n' +
+                    '        <th>Server name</th>\n' +
+                    '        <th>Delete</th>\n' +
+                    '    </tr>';
+                for (var i = 0; i < servers.length; i++) {
+                    var server = servers[i];
+                    console.log(server);
+                    html = html + '<tr><td>' + server.id + '</td>\n' +
+                        '        <td>' + server.name + '</td>\n' +
+                        '        <td><button onclick="deleteUser(' + server.id + ')">Delete</button></td></tr>';
+
+                }
+                document.getElementById("servList").innerHTML = html;
+            }
+        };
+        xhttp.open("GET", "http://localhost:8080/ovmm_commands/ExecComndDto?command=list server", true);
+        xhttp.send();
+    }
+
+    loadServ();    
     
 </script>
 </body>

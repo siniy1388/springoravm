@@ -60,7 +60,7 @@ public class sshCommand {
        }
    }
 
-    public StringBuilder executeCmd(String command) throws JSchException, IOException {
+    public StringBuffer executeCmd(String command) throws JSchException, IOException {
        BufferedReader reader = null;
        Channel channel = null;
        channel = session.openChannel("exec");
@@ -74,14 +74,16 @@ public class sshCommand {
                Charset.forName(charset)));
        String buf;
        System.out.println("OutPutResult:"+"\n");
-       StringBuilder buffer = new StringBuilder();
+       StringBuffer buffer = new StringBuffer();
        while ((buf = reader.readLine()) != null) {
            System.out.println(buf);
-           buffer.append(buf);
-           buffer.append("\n");
+           if (!buf.contains("Command") && !buf.contains("Status") 
+               && !buf.contains("Time") && !buf.contains("Data") 
+               && !buf.contains("OVM")        ){
+                    buffer.append(buf);
+//                    buffer.append("\n");
+           }
        }
-//       System.out.println("**********************************");
-//       System.out.println("ReturnResult:"+"\n"+buffer.toString());
        channel.disconnect();
         return buffer;
    }
