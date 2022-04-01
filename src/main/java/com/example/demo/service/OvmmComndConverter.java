@@ -5,7 +5,16 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.OvmmComndDto;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import static org.eclipse.persistence.expressions.ExpressionOperator.Log;
 import org.springframework.stereotype.Component;
+import org.json.CDL;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  *
@@ -25,14 +34,22 @@ public class OvmmComndConverter {
         return ovmmcomnd;
     }
     
-    public OvmmComndDto fromStrDtoVmToOvmmComnd(StringBuffer ovmmComnd) {
-//        Pattern pattern = Pattern.compile("HaT52\\d");
-//    String line = "HaT523HaT524HaT525";
-//    Matcher matcher = pattern.matcher(line);
-//    String[] array = new String[3];
-//    for (int i = 0; matcher.find(); i++) {
-//        array[i] = matcher.group();
-//    }
+    public OvmmComndDto fromStrDtoVmToOvmmComnd(StringBuilder ovmmComnd) {
+//        Pattern pattern_id = Pattern.compile("id:\\d");
+//        Pattern pattern_nm = Pattern.compile("name:\\d");
+//        //String line = ovmmComnd;
+//        Matcher matcher_id = pattern_id.matcher(ovmmComnd);
+//        Matcher matcher_nm = pattern_nm.matcher(ovmmComnd);
+//        String[] array = new String[3];
+//        for (int i = 0; matcher_id.find(); i++) {
+//            array[i] = matcher_id.group();
+//        }
+        try{
+            JSONObject ovmmComndJsObj = new JSONObject(ovmmComnd);
+            JSONArray weatherArray = new JSONArray(ovmmComnd.toString());
+        }catch (JSONException err){
+            Logger.getLogger(DefaultUsersService.class.getName()).log(Level.SEVERE, null, err);
+        }
         int iid = ovmmComnd.indexOf("id:");
         int inm = ovmmComnd.indexOf("name:");
         int len = ovmmComnd.length();           

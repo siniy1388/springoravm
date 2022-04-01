@@ -7,6 +7,7 @@ package com.example.demo.sshservice;
 
 // import ch.ethz.ssh2.Session;
 
+import com.example.demo.dto.OvmmComndDto;
 import com.example.demo.service.DefaultUsersService;
 import com.jcraft.jsch.*;
 import java.io.BufferedReader;
@@ -15,6 +16,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.logging.Level;
+import org.json.JSONObject;
 
 
 
@@ -60,7 +62,7 @@ public class sshCommand {
        }
    }
 
-    public StringBuffer executeCmd(String command) throws JSchException, IOException {
+    public StringBuilder executeCmd(String command) throws JSchException, IOException {
        BufferedReader reader = null;
        Channel channel = null;
        channel = session.openChannel("exec");
@@ -74,21 +76,31 @@ public class sshCommand {
                Charset.forName(charset)));
        String buf;
        System.out.println("OutPutResult:"+"\n");
-       StringBuffer buffer = new StringBuffer();
+       StringBuilder buffer = new StringBuilder();
+       buffer.append("[");
        while ((buf = reader.readLine()) != null) {
-           System.out.println(buf);
+           //System.out.println(buf);
            if (!buf.contains("Command") && !buf.contains("Status") 
                && !buf.contains("Time") && !buf.contains("Data") 
-               && !buf.contains("OVM")        ){
-                    buffer.append(buf);
-//                    buffer.append("\n");
+               && !buf.contains("OVM") && !buf.isEmpty()){
+                    buffer.append(strToJson(buf));
+                 //   buffer.append("\n");
            }
        }
+       buffer.append("]");
        channel.disconnect();
         return buffer;
    }
-
-		
-
     
+    private JSONObject strToJson(String bufline){
+        int iid = bufline.indexOf("id");
+        int inm = bufline.indexOf("name");
+        int len = bufline.length();   
+        String tmpline = "{" + "id:"+ bufline.substring(iid +3, inm - 2)+
+            ",name:" + bufline.substring(inm + 5, len)+"}";
+        System.out.println(tmpline);
+        JSONObject ovmmComndJsObj = new JSONObject(tmpline);
+        return ovmmComndJsObj;        
+    }
+ 
 }
