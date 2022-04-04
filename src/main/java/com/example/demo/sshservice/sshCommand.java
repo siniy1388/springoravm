@@ -77,6 +77,7 @@ public class sshCommand {
        String buf;
        System.out.println("OutPutResult:"+"\n");
        StringBuilder buffer = new StringBuilder();
+       String ttt;
        buffer.append("[");
        while ((buf = reader.readLine()) != null) {
            //System.out.println(buf);
@@ -84,8 +85,12 @@ public class sshCommand {
                && !buf.contains("Time") && !buf.contains("Data") 
                && !buf.contains("OVM") && !buf.isEmpty()){
                     buffer.append(strToJson(buf));
+                    buffer.append(",");
                  //   buffer.append("\n");
            }
+       }
+       if (buffer.lastIndexOf(",") == buffer.length()){
+          ttt = buffer.replace(buffer.length(),buffer.length(), "").toString();
        }
        buffer.append("]");
        channel.disconnect();
@@ -96,8 +101,9 @@ public class sshCommand {
         int iid = bufline.indexOf("id");
         int inm = bufline.indexOf("name");
         int len = bufline.length();   
-        String tmpline = "{" + "id:"+ bufline.substring(iid +3, inm - 2)+
-            ",name:" + bufline.substring(inm + 5, len)+"}";
+        String tmpline = "{" + "id:"+ bufline.substring(iid +3, inm - 2)
+                    .replace(":", "-")+
+            ",name:" + bufline.substring(inm + 5, len).replace(":", "-")+"}";
         System.out.println(tmpline);
         JSONObject ovmmComndJsObj = new JSONObject(tmpline);
         return ovmmComndJsObj;        

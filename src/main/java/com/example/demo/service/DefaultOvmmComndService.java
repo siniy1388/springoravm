@@ -22,12 +22,12 @@ public class DefaultOvmmComndService implements OvmmComndService {
        private final OvmmComndConverter ovmmcomndconverter;
     
     @Override
-    public OvmmComndDto execComnd(String command) {
+    public StringBuilder execComnd(String command) {
         // String command = "list vm";
-        OvmmComndDto ressh = null;
+        StringBuilder ressh = null;
         try{
             sshCommand cmnd = new sshCommand("admin","Bratsk1388","192.168.0.11",10000);
-            ressh = (OvmmComndDto) ovmmcomndconverter.fromStrDtoVmToOvmmComnd(cmnd.executeCmd(command));
+            ressh =  ovmmcomndconverter.fromStrDtoVmToOvmmComnd(cmnd.executeCmd(command));
 //            return (OvmmComndDto) ovmmcomndconverter.fromStrDtoVmToOvmmComnd(ressh);
         } catch(Exception ex) {
             Logger.getLogger(DefaultUsersService.class.getName()).log(Level.SEVERE, null, ex);

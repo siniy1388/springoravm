@@ -34,9 +34,9 @@ public class OvmmController {
 //    }
     
     @GetMapping("/ExecComndDto")
-    public OvmmComndDto execComnd(@RequestParam String command) {
+    public StringBuilder execComnd(@RequestParam String command) {
         log.info("Handling ExecComnd: " + command);
-        return (OvmmComndDto) ovmmcomndservice.execComnd(command);
+        return ovmmcomndservice.execComnd(command);
     }
     
 }

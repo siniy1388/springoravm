@@ -12,5 +12,5 @@ import com.example.demo.dto.OvmmComndDto;
  * @author siniy_P
  */
 public interface OvmmComndService {
-    OvmmComndDto execComnd(String command);
+    StringBuilder execComnd(String command);
 }

@@ -34,7 +34,7 @@ public class OvmmComndConverter {
         return ovmmcomnd;
     }
     
-    public OvmmComndDto fromStrDtoVmToOvmmComnd(StringBuilder ovmmComnd) {
+    public StringBuilder fromStrDtoVmToOvmmComnd(StringBuilder ovmmComnd) {
 //        Pattern pattern_id = Pattern.compile("id:\\d");
 //        Pattern pattern_nm = Pattern.compile("name:\\d");
 //        //String line = ovmmComnd;
@@ -44,21 +44,22 @@ public class OvmmComndConverter {
 //        for (int i = 0; matcher_id.find(); i++) {
 //            array[i] = matcher_id.group();
 //        }
-        try{
-            JSONObject ovmmComndJsObj = new JSONObject(ovmmComnd);
-            JSONArray weatherArray = new JSONArray(ovmmComnd.toString());
-        }catch (JSONException err){
-            Logger.getLogger(DefaultUsersService.class.getName()).log(Level.SEVERE, null, err);
-        }
-        int iid = ovmmComnd.indexOf("id:");
-        int inm = ovmmComnd.indexOf("name:");
-        int len = ovmmComnd.length();           
-        return OvmmComndDto.builder()
-                .id(ovmmComnd.substring(iid +3, inm - 2))
-                .name(ovmmComnd.substring(inm +3, len))
-//                .userid(uservm.getNameVm())
-//                .command(uservm.getCdvmSystem())
-                .build();
+//        try{
+//            JSONObject ovmmComndJsObj = new JSONObject(ovmmComnd);
+//            JSONArray weatherArray = new JSONArray(ovmmComnd.toString());
+//        }catch (JSONException err){
+//            Logger.getLogger(DefaultUsersService.class.getName()).log(Level.SEVERE, null, err);
+//        }
+//        int iid = ovmmComnd.indexOf("id:");
+//        int inm = ovmmComnd.indexOf("name:");
+//        int len = ovmmComnd.length();           
+//        return OvmmComndDto.builder()
+//                .id(ovmmComnd.substring(iid +3, inm - 2))
+//                .name(ovmmComnd.substring(inm +3, len))
+////                .userid(uservm.getNameVm())
+////                .command(uservm.getCdvmSystem())
+//                .build();
+         return ovmmComnd;
     }
     
 }
