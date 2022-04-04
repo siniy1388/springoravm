@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.util.Optional;
 import java.util.logging.Level;
 import org.json.JSONObject;
 
@@ -77,7 +78,7 @@ public class sshCommand {
        String buf;
        System.out.println("OutPutResult:"+"\n");
        StringBuilder buffer = new StringBuilder();
-       String ttt;
+       //String ttt;
        buffer.append("[");
        while ((buf = reader.readLine()) != null) {
            //System.out.println(buf);
@@ -89,12 +90,11 @@ public class sshCommand {
                  //   buffer.append("\n");
            }
        }
-       if (buffer.lastIndexOf(",") == buffer.length()){
-          ttt = buffer.replace(buffer.length(),buffer.length(), "").toString();
-       }
-       buffer.append("]");
+       StringBuilder buff1 = new StringBuilder(buffer.toString()
+                   .substring(0,buffer.length()-1));
+       buff1.append("]");
        channel.disconnect();
-        return buffer;
+        return buff1;
    }
     
     private JSONObject strToJson(String bufline){
@@ -108,5 +108,12 @@ public class sshCommand {
         JSONObject ovmmComndJsObj = new JSONObject(tmpline);
         return ovmmComndJsObj;        
     }
+    
+//    public static String removeLastCharOpti(String s) {
+//    return Optional.ofNullable(s)
+//      .filter(str -> str.length() != 0)
+//      .map(str -> str.substring(0, str.length() - 1))
+//      .orElse(s);
+//    }
  
 }
