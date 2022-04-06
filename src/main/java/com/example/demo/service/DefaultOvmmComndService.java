@@ -6,9 +6,12 @@ package com.example.demo.service;
 
 import com.example.demo.dto.OvmmComndDto;
 import com.example.demo.sshservice.sshCommand;
+import com.jcraft.jsch.JSchException;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import lombok.AllArgsConstructor;
+import org.apache.tomcat.util.json.ParseException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -26,12 +29,27 @@ public class DefaultOvmmComndService implements OvmmComndService {
         // String command = "list vm";
         StringBuilder ressh = null;
         try{
-            sshCommand cmnd = new sshCommand("admin","Bratsk1388","192.168.0.11",10000);
+            sshCommand cmnd = new sshCommand(); // "admin","Bratsk1388","192.168.0.11",10000
             ressh =  ovmmcomndconverter.fromStrDtoVmToOvmmComnd(cmnd.executeCmd(command));
 //            return (OvmmComndDto) ovmmcomndconverter.fromStrDtoVmToOvmmComnd(ressh);
-        } catch(Exception ex) {
+        } catch(JSchException | IOException ex) {
             Logger.getLogger(DefaultUsersService.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return ressh;
+    }
+    
+    @Override
+    public StringBuilder getServerInfo(String serverID){
+        StringBuilder ressh = null;
+        try{
+            sshCommand cmnd = new sshCommand(); // "admin","Bratsk1388","192.168.0.11",10000
+            ressh =  ovmmcomndconverter.fromStrDtoVmToOvmmComnd(cmnd.getServerInfo(serverID));
+//            return (OvmmComndDto) ovmmcomndconverter.fromStrDtoVmToOvmmComnd(ressh);
+        } catch(JSchException | IOException ex) {
+            Logger.getLogger(DefaultUsersService.class.getName()).log(Level.SEVERE, null, ex);
+        }  catch (ParseException ex) {
+               Logger.getLogger(DefaultOvmmComndService.class.getName()).log(Level.SEVERE, null, ex);
+           }
         return ressh;
     }
     

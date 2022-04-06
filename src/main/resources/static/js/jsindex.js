@@ -23,6 +23,7 @@ function openTab(evt, cityName) {
             break;
             
 }
+}
 
 function loadCommands() {
                 var xhttp = new XMLHttpRequest();
@@ -129,14 +130,14 @@ function loadVms() {
                 var html = '<tr>\n' +
                     '        <th>Server id</th>\n' +
                     '        <th>Server name</th>\n' +
-                    '        <th>Delete</th>\n' +
+                    '        <th>Show Vms</th>\n' +
                     '    </tr>';
                 for (var i = 0; i < servers.length; i++) {
                     var server = servers[i];
                     console.log(server);
                     html = html + '<tr><td>' + server.id + '</td>\n' +
                         '        <td>' + server.name + '</td>\n' +
-                        '        <td><button onclick="deleteUser(' + server.id + ')">Delete</button></td></tr>';
+                        '        <td><button onclick="getServerInfo()">Show Vms</button></td></tr>';
 
                 }
                 document.getElementById("servList").innerHTML = html;
@@ -146,6 +147,8 @@ function loadVms() {
         xhttp.send();
     }
     
+    
+    
     function loadVmForServer(idServer) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
@@ -154,14 +157,14 @@ function loadVms() {
                 var html = '<tr>\n' +
                     '        <th>Server id</th>\n' +
                     '        <th>Server name</th>\n' +
-                    '        <th>Delete</th>\n' +
+                    '        <th>Show Vms</th>\n' +
                     '    </tr>';
                 for (var i = 0; i < servers.length; i++) {
                     var server = servers[i];
                     console.log(server);
                     html = html + '<tr><td>' + server.id + '</td>\n' +
                         '        <td>' + server.name + '</td>\n' +
-                        '        <td><button onclick="deleteUser(' + server.id + ')">Delete</button></td></tr>';
+                        '        <td><button onclick="getServerInfo(' + server.id + ')">Show Vms</button></td></tr>';
 
                 }
                 document.getElementById("servList").innerHTML = html;
@@ -170,4 +173,31 @@ function loadVms() {
         xhttp.open("GET", "http://localhost:8080/ovmm_commands/ExecComndDto?command=list vm", true);
         xhttp.send();
     }
+    
+    function getServerInfo(){
+//      "' + server.id + '" vserverid
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                var vms = JSON.parse(this.responseText);
+                var html = '<tr>\n' +
+                    '        <th>Vm id</th>\n' +
+                    '        <th>Vm name</th>\n' +
+                    '        <th>Show Vms</th>\n' +
+                    '    </tr>';
+                for (var i = 0; i < vms.length; i++) {
+                    var vmm = vms[i];
+                    console.log(vmm);
+                    html = html + '<tr><td>' + vmm.id + '</td>\n' +
+                        '        <td>' + vmm.name + '</td>\n' +
+                        '        <td><button onclick="getServerInfo(' + vmm.id + ')">Show Vms</button></td></tr>';
+
+                }
+                document.getElementById("vmList").innerHTML = html;
+            }
+        };
+        xhttp.open("GET", "http://localhost:8080/ovmm_commands/getServerInfo?serverID=" +"54-a0-50-55-a7-4b-18-d6-c7-01-b0-2b-ff-ff-ff-ff", true);
+        xhttp.send();
     }
+    
+  

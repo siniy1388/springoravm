@@ -13,4 +13,6 @@ import com.example.demo.dto.OvmmComndDto;
  */
 public interface OvmmComndService {
     StringBuilder execComnd(String command);
+    
+    StringBuilder getServerInfo(String serverID);
 }
