@@ -53,4 +53,19 @@ public class DefaultOvmmComndService implements OvmmComndService {
         return ressh;
     }
     
+    @Override
+    public StringBuilder getVmInfo(String vmID){
+        StringBuilder ressh = null;
+        try{
+            sshCommand cmnd = new sshCommand(); // "admin","Bratsk1388","192.168.0.11",10000
+            ressh =  ovmmcomndconverter.fromStrDtoVmToOvmmComnd(cmnd.getVmInfo(vmID));
+//            return (OvmmComndDto) ovmmcomndconverter.fromStrDtoVmToOvmmComnd(ressh);
+        } catch(JSchException | IOException ex) {
+            Logger.getLogger(DefaultUsersService.class.getName()).log(Level.SEVERE, null, ex);
+        }  catch (ParseException ex) {
+               Logger.getLogger(DefaultOvmmComndService.class.getName()).log(Level.SEVERE, null, ex);
+           }
+        return ressh;
+    }
+    
 }

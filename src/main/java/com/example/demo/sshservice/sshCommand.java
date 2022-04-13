@@ -36,6 +36,9 @@ public class sshCommand {
     int port = 10000;
     private Session session;
     String charset = "UTF-8";
+    BufferedReader reader = null;
+    Channel channel = null;
+       
     
     private void Connection() throws JSchException {
        JSch js = new JSch();
@@ -43,6 +46,7 @@ public class sshCommand {
        session.setPassword(passwd);
        session.setConfig("StrictHostKeyChecking", "no");
        session.connect();
+       channel = session.openChannel("exec");
 
    }
     
@@ -66,9 +70,9 @@ public class sshCommand {
    }
 
     public StringBuilder executeCmd(String command) throws JSchException, IOException {
-       BufferedReader reader = null;
-       Channel channel = null;
-       channel = session.openChannel("exec");
+//       BufferedReader reader = null;
+//       Channel channel = null;
+//       channel = session.openChannel("exec");
        ((ChannelExec) channel).setCommand(command);
        channel.setInputStream(null);
        ((ChannelExec) channel).setErrStream(System.err);
@@ -101,9 +105,9 @@ public class sshCommand {
     
     public StringBuilder getServerInfo(String servID) throws JSchException, IOException, ParseException {
 //        System.out.println("!!!-----------getServerInfo--------------!!!");
-       BufferedReader reader = null;
-       Channel channel = null;
-       channel = session.openChannel("exec");
+//       BufferedReader reader = null;
+//       Channel channel = null;
+//       channel = session.openChannel("exec");
        String command = "show Server id=" + servID.replaceAll("-", ":");
        ((ChannelExec) channel).setCommand(command);
        channel.setInputStream(null);
@@ -127,6 +131,38 @@ public class sshCommand {
        buffer = new StringBuilder(buffer.toString()
                    .substring(0,buffer.length()-1));
        buffer.append("]");
+       channel.disconnect();
+        return buffer;
+   }
+    
+    public StringBuilder getVmInfo(String vmID) throws JSchException, IOException, ParseException {
+//        System.out.println("!!!-----------getServerInfo--------------!!!");
+//       BufferedReader reader = null;
+//       Channel channel = null;
+//       channel = session.openChannel("exec");
+       String command = "show vm id=" + vmID;
+       ((ChannelExec) channel).setCommand(command);
+       channel.setInputStream(null);
+       ((ChannelExec) channel).setErrStream(System.err);
+       channel.connect();
+       InputStream in = channel.getInputStream();
+       reader = new BufferedReader(new InputStreamReader(in,
+               Charset.forName(charset)));
+       String buf;
+       StringBuilder buffer = new StringBuilder();
+       //String ttt;
+      // buffer.append("[");
+       while ((buf = reader.readLine()) != null) {
+           //System.out.println(buf);
+          // if (buf.contains("Vm ") && !buf.contains("Ability")){
+                    buffer.append(buf);
+                   // buffer.append(",");
+                 //   buffer.append("\n");
+          // }
+       }
+//       buffer = new StringBuilder(buffer.toString()
+//                   .substring(0,buffer.length()-1));
+      // buffer.append("]");
        channel.disconnect();
         return buffer;
    }

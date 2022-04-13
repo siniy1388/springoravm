@@ -127,17 +127,15 @@ function loadVms() {
         xhttp.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
                 var servers = JSON.parse(this.responseText);
-                var html = '<tr>\n' +
-                    '        <th>Server id</th>\n' +
+                var html = '<tr >\n' +
                     '        <th>Server name</th>\n' +
-                    '        <th>Show Vms</th>\n' +
                     '    </tr>';
                 for (var i = 0; i < servers.length; i++) {
                     var server = servers[i];
                     console.log(server);
-                    html = html + '<tr><td>' + server.id + '</td>\n' +
-                        '        <td>' + server.name + '</td>\n' +
-                        '        <td><button onclick="getServerInfo()">Show Vms</button></td></tr>';
+                    html = html + 
+                        '        <tr onclick="getServerVms(\'' +server.id+ '\')"><td id=' + server.id + '>' + server.name + '</td>\n' +
+                        '   </tr>';
 
                 }
                 document.getElementById("servList").innerHTML = html;
@@ -149,55 +147,55 @@ function loadVms() {
     
     
     
-    function loadVmForServer(idServer) {
+    function getVmInfo(vmId) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
-                var servers = JSON.parse(this.responseText);
+                var vminfo = this.responseText;
                 var html = '<tr>\n' +
-                    '        <th>Server id</th>\n' +
-                    '        <th>Server name</th>\n' +
-                    '        <th>Show Vms</th>\n' +
+                    '        <p>Vm Info</p>\n' +
                     '    </tr>';
-                for (var i = 0; i < servers.length; i++) {
-                    var server = servers[i];
-                    console.log(server);
-                    html = html + '<tr><td>' + server.id + '</td>\n' +
-                        '        <td>' + server.name + '</td>\n' +
-                        '        <td><button onclick="getServerInfo(' + server.id + ')">Show Vms</button></td></tr>';
+//                for (var i = 0; i < servers.length; i++) {
+//                    var server = servers[i];
+                    console.log(vminfo);
+                    html = html + 
+                        '        <tr><p>' + vminfo + '</td>\n' +
+                        '</tr>';
 
-                }
+               // }
                 document.getElementById("servList").innerHTML = html;
             }
         };
-        xhttp.open("GET", "http://localhost:8080/ovmm_commands/ExecComndDto?command=list vm", true);
+        xhttp.open("GET", "http://localhost:8080/ovmm_commands/getVmInfo?vmId="+vmId, true);
         xhttp.send();
     }
     
-    function getServerInfo(){
-//      "' + server.id + '" vserverid
+    function getServerVms(vserverid){
+//        console.log(vserverid);
+        alert("Hello");
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
                 var vms = JSON.parse(this.responseText);
                 var html = '<tr>\n' +
-                    '        <th>Vm id</th>\n' +
                     '        <th>Vm name</th>\n' +
-                    '        <th>Show Vms</th>\n' +
+                    '        <th>getVmInfo</th>\n' +
                     '    </tr>';
                 for (var i = 0; i < vms.length; i++) {
                     var vmm = vms[i];
                     console.log(vmm);
-                    html = html + '<tr><td>' + vmm.id + '</td>\n' +
+                    html = html + 
                         '        <td>' + vmm.name + '</td>\n' +
-                        '        <td><button onclick="getServerInfo(' + vmm.id + ')">Show Vms</button></td></tr>';
+                        '        <td><button onclick="getVmInfo(\'' + vmm.id + '\')">getVmInfo</button></td></tr>';
 
                 }
-                document.getElementById("vmList").innerHTML = html;
+                document.getElementById("vmInfo").innerHTML = html;
             }
         };
-        xhttp.open("GET", "http://localhost:8080/ovmm_commands/getServerInfo?serverID=" +"54-a0-50-55-a7-4b-18-d6-c7-01-b0-2b-ff-ff-ff-ff", true);
+        xhttp.open("GET", "http://localhost:8080/ovmm_commands/getServerInfo?serverID=" +vserverid, true);
         xhttp.send();
     }
+    
+  
     
   

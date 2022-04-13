@@ -15,4 +15,6 @@ public interface OvmmComndService {
     StringBuilder execComnd(String command);
     
     StringBuilder getServerInfo(String serverID);
+    
+    StringBuilder getVmInfo(String vmId);
 }

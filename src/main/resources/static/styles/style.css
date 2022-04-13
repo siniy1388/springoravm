@@ -49,3 +49,8 @@
     width:30%; 
     height:30%
 }
+.clickRowStyl{
+  background-color: #00b4ed;
+}
+/*.ant-table-tbody.clickRowStyl:hover>td
+  background-color #00b4ed*/
