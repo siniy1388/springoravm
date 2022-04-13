@@ -172,7 +172,7 @@ function loadVms() {
     
     function getServerVms(vserverid){
 //        console.log(vserverid);
-        alert("Hello");
+//        alert("Hello");
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
