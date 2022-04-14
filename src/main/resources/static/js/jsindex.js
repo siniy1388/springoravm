@@ -163,7 +163,7 @@ function loadVms() {
                         '</tr>';
 
                // }
-                document.getElementById("servList").innerHTML = html;
+                document.getElementById("vmInfo").innerHTML = html;
             }
         };
         xhttp.open("GET", "http://localhost:8080/ovmm_commands/getVmInfo?vmId="+vmId, true);
@@ -189,7 +189,7 @@ function loadVms() {
                         '        <td><button onclick="getVmInfo(\'' + vmm.id + '\')">getVmInfo</button></td></tr>';
 
                 }
-                document.getElementById("vmInfo").innerHTML = html;
+                document.getElementById("vmList").innerHTML = html;
             }
         };
         xhttp.open("GET", "http://localhost:8080/ovmm_commands/getServerInfo?serverID=" +vserverid, true);
