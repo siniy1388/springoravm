@@ -15,5 +15,7 @@ public interface sshUtils {
     public JSONObject strVmToJson(String bufline);
     
     public JSONObject strToJson(String bufline);
+    
+    public JSONObject infoToJson(String bufline);
 
 }

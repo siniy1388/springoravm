@@ -22,7 +22,6 @@ public class sshConvertUtils implements sshUtils {
         String tmpline = "{" + "id:"+ bufline.substring(iid +3, inm - 2)
                     .replace(":", "-")+
             ",name:" + bufline.substring(inm + 5, len).replace(":", "-")+"}";
-//        System.out.println(tmpline);
         JSONObject ovmmComndJsObj = new JSONObject(tmpline);
         return ovmmComndJsObj;        
     }
@@ -34,9 +33,14 @@ public class sshConvertUtils implements sshUtils {
         int len = bufline.length();   
         String tmpline = "{" + "id:"+ bufline.substring(iid +2, inm - 2) +
             ",name:" + bufline.substring(inm + 1, len-1)+"}";
-//        System.out.println(tmpline);
         JSONObject ovmmComndJsObj = new JSONObject(tmpline);
         return ovmmComndJsObj;        
     }
+    
+    @Override
+    public JSONObject infoToJson(String bufline){
+        return new JSONObject(bufline.replace(" = ", ":"));
+    }
+    
     
 }
