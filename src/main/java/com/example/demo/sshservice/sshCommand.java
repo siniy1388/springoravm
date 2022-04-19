@@ -138,34 +138,37 @@ public class sshCommand {
        reader = new BufferedReader(new InputStreamReader(in,
                Charset.forName(charset)));
        String buf;
+       Boolean isdata = false;
        StringBuilder buffer = new StringBuilder();
-       //String ttt;
        buffer.append("[");
-       buffer.append("{");
        while ((buf = reader.readLine()) != null) {
-           if (!buf.contains("OVM")){
-            if (buf.contains("Command") || buf.contains("Status") 
-               && !buf.contains("Time") ){
-                parser = new JSONParser(buf);  
-                JSONObject json = (JSONObject) parser.parse();  
+           if (!buf.contains("OVM") && (buf.length() != 0)){
+            if (buf.contains("Command") || (buf.contains("Status") && !isdata)
+               || buf.contains("Time") ){
+                String tmpline = "{\"" + buf.substring(0 , buf.indexOf(":")).trim() + "\":\""+
+                        buf.substring(buf.indexOf(":")+1 , buf.length()).trim() + "\"}";
+                //String tmpline = "{" + buf + "}";
+                //System.out.println(tmpline);
+                JSONObject json = new JSONObject(tmpline);
+                //System.out.println(json);
                 buffer.append(json);
                 buffer.append(",");
+            }else{
+                if (buf.contains("Data")){
+                    isdata = true;
+                    buffer.append("{Data :{");
+                    //buffer.append(",");
+                }else{
+                    System.out.println(buf);
+                    buffer.append(sshutils.infoToJson(buf));
+                    buffer.append(",");
+                }
             }
-            if (buf.contains("Data")){
-                buffer.append(buf + ":{");
-                buffer.append(",");
-            }
-            else{
-                buffer.append(sshutils.infoToJson(buf));
-                buffer.append(",");
-            }
+            
            } 
-                   // buffer.append(",");
-                 //   buffer.append("\n");
-          // }
        }
-//       buffer = new StringBuilder(buffer.toString()
-//                   .substring(0,buffer.length()-1));
+
+       buffer.append("}");
        buffer.append("]");
        channel.disconnect();
         return buffer;

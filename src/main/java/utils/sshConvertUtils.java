@@ -39,7 +39,18 @@ public class sshConvertUtils implements sshUtils {
     
     @Override
     public JSONObject infoToJson(String bufline){
-        return new JSONObject(bufline.replace(" = ", ":"));
+        
+        JSONObject res = null;
+        try{
+            String tmpline = "{\"" + bufline.substring(0 , bufline.indexOf("=")).trim() + "\":\""+
+                        bufline.substring(bufline.indexOf("=")+1 , bufline.length()).trim() + "\"}";
+            System.out.println(tmpline );
+            res = new JSONObject(tmpline);
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        
+        return res;
     }
     
     
