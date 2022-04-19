@@ -27,7 +27,7 @@ public class DefaultUserVmService implements UserVmService {
 
     @Override
     public UserVmDto saveUser(UserVmDto userVmDto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
@@ -41,7 +41,7 @@ public class DefaultUserVmService implements UserVmService {
 
     @Override
     public UserVmDto findByVmName(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
