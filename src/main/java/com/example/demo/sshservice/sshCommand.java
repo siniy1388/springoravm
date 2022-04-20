@@ -17,7 +17,7 @@ import java.nio.charset.Charset;
 import java.util.logging.Level;
 import org.apache.tomcat.util.json.*;
 import org.json.JSONObject;
-import utils.sshConvertUtils;
+import com.example.demo.utils.sshConvertUtils;
 
 
 
@@ -156,7 +156,7 @@ public class sshCommand {
             }else{
                 if (buf.contains("Data")){
                     isdata = true;
-                    buffer.append("{Data :{");
+                    buffer.append("{\"Data\":[");
                     //buffer.append(",");
                 }else{
                     System.out.println(buf);
@@ -167,7 +167,8 @@ public class sshCommand {
             
            } 
        }
-
+       buffer.setLength(buffer.length()-1);
+       buffer.append("]");
        buffer.append("}");
        buffer.append("]");
        channel.disconnect();

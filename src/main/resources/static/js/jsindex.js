@@ -152,6 +152,7 @@ function loadVms() {
         xhttp.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
                 var vminfo = this.responseText;
+                var vparse = JSON.parse(vminfo);
                 var html = '<tr>\n' +
                     '        <p>Vm Info</p>\n' +
                     '    </tr>';
