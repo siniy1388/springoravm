@@ -5,7 +5,6 @@
  */
 package com.example.demo.sshservice;
 
-// import ch.ethz.ssh2.Session;
 
 import com.example.demo.dto.OvmmComndDto;
 import com.example.demo.service.DefaultUsersService;
@@ -15,11 +14,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
-import java.util.Optional;
 import java.util.logging.Level;
-import org.apache.tomcat.util.json.JSONParser;
-import org.apache.tomcat.util.json.ParseException;
+import org.apache.tomcat.util.json.*;
 import org.json.JSONObject;
+import utils.sshConvertUtils;
 
 
 
@@ -30,6 +28,8 @@ import org.json.JSONObject;
  */
 public class sshCommand {
     
+    private sshConvertUtils sshutils;
+    
     String host = "192.168.0.11";
     String user = "admin";
     String passwd = "Bratsk1388";
@@ -38,6 +38,8 @@ public class sshCommand {
     String charset = "UTF-8";
     BufferedReader reader = null;
     Channel channel = null;
+    JSONParser parser;
+    
        
     
     private void Connection() throws JSchException {
@@ -47,14 +49,11 @@ public class sshCommand {
        session.setConfig("StrictHostKeyChecking", "no");
        session.connect();
        channel = session.openChannel("exec");
-
+       sshutils = new sshConvertUtils();
+       
    }
     
-    public sshCommand(){ //String user,String passwd,String host,int port
-//       this.user = user;
-//       this.passwd = passwd;
-//       this.host = host;
-//       this.port = port;
+    public sshCommand(){
        try{
            Connection() ;
        } catch(JSchException ex)  {
@@ -70,9 +69,6 @@ public class sshCommand {
    }
 
     public StringBuilder executeCmd(String command) throws JSchException, IOException {
-//       BufferedReader reader = null;
-//       Channel channel = null;
-//       channel = session.openChannel("exec");
        ((ChannelExec) channel).setCommand(command);
        channel.setInputStream(null);
        ((ChannelExec) channel).setErrStream(System.err);
@@ -91,7 +87,7 @@ public class sshCommand {
            if (!buf.contains("Command") && !buf.contains("Status") 
                && !buf.contains("Time") && !buf.contains("Data") 
                && !buf.contains("OVM") && !buf.isEmpty()){
-                    buffer.append(strToJson(buf));
+                    buffer.append(sshutils.strToJson(buf));
                     buffer.append(",");
                  //   buffer.append("\n");
            }
@@ -104,10 +100,7 @@ public class sshCommand {
    }
     
     public StringBuilder getServerInfo(String servID) throws JSchException, IOException, ParseException {
-//        System.out.println("!!!-----------getServerInfo--------------!!!");
-//       BufferedReader reader = null;
-//       Channel channel = null;
-//       channel = session.openChannel("exec");
+
        String command = "show Server id=" + servID.replaceAll("-", ":");
        ((ChannelExec) channel).setCommand(command);
        channel.setInputStream(null);
@@ -123,7 +116,7 @@ public class sshCommand {
        while ((buf = reader.readLine()) != null) {
            //System.out.println(buf);
            if (buf.contains("Vm ") && !buf.contains("Ability")){
-                    buffer.append(strVmToJson(buf));
+                    buffer.append(sshutils.strVmToJson(buf));
                     buffer.append(",");
                  //   buffer.append("\n");
            }
@@ -136,10 +129,6 @@ public class sshCommand {
    }
     
     public StringBuilder getVmInfo(String vmID) throws JSchException, IOException, ParseException {
-//        System.out.println("!!!-----------getServerInfo--------------!!!");
-//       BufferedReader reader = null;
-//       Channel channel = null;
-//       channel = session.openChannel("exec");
        String command = "show vm id=" + vmID;
        ((ChannelExec) channel).setCommand(command);
        channel.setInputStream(null);
@@ -149,45 +138,41 @@ public class sshCommand {
        reader = new BufferedReader(new InputStreamReader(in,
                Charset.forName(charset)));
        String buf;
+       Boolean isdata = false;
        StringBuilder buffer = new StringBuilder();
-       //String ttt;
-      // buffer.append("[");
+       buffer.append("[");
        while ((buf = reader.readLine()) != null) {
-           //System.out.println(buf);
-          // if (buf.contains("Vm ") && !buf.contains("Ability")){
-                    buffer.append(buf);
-                   // buffer.append(",");
-                 //   buffer.append("\n");
-          // }
+           if (!buf.contains("OVM") && (buf.length() != 0)){
+            if (buf.contains("Command") || (buf.contains("Status") && !isdata)
+               || buf.contains("Time") ){
+                String tmpline = "{\"" + buf.substring(0 , buf.indexOf(":")).trim() + "\":\""+
+                        buf.substring(buf.indexOf(":")+1 , buf.length()).trim() + "\"}";
+                //String tmpline = "{" + buf + "}";
+                //System.out.println(tmpline);
+                JSONObject json = new JSONObject(tmpline);
+                //System.out.println(json);
+                buffer.append(json);
+                buffer.append(",");
+            }else{
+                if (buf.contains("Data")){
+                    isdata = true;
+                    buffer.append("{Data :{");
+                    //buffer.append(",");
+                }else{
+                    System.out.println(buf);
+                    buffer.append(sshutils.infoToJson(buf));
+                    buffer.append(",");
+                }
+            }
+            
+           } 
        }
-//       buffer = new StringBuilder(buffer.toString()
-//                   .substring(0,buffer.length()-1));
-      // buffer.append("]");
+
+       buffer.append("}");
+       buffer.append("]");
        channel.disconnect();
         return buffer;
    }
     
-    private JSONObject strToJson(String bufline){
-        int iid = bufline.indexOf("id");
-        int inm = bufline.indexOf("name");
-        int len = bufline.length();   
-        String tmpline = "{" + "id:"+ bufline.substring(iid +3, inm - 2)
-                    .replace(":", "-")+
-            ",name:" + bufline.substring(inm + 5, len).replace(":", "-")+"}";
-        System.out.println(tmpline);
-        JSONObject ovmmComndJsObj = new JSONObject(tmpline);
-        return ovmmComndJsObj;        
-    }
-    
-    private JSONObject strVmToJson(String bufline){
-        int iid = bufline.indexOf("=");
-        int inm = bufline.indexOf("[");
-        int len = bufline.length();   
-        String tmpline = "{" + "id:"+ bufline.substring(iid +2, inm - 2) +
-            ",name:" + bufline.substring(inm + 1, len-1)+"}";
-        System.out.println(tmpline);
-        JSONObject ovmmComndJsObj = new JSONObject(tmpline);
-        return ovmmComndJsObj;        
-    }
     
 }
