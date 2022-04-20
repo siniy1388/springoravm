@@ -180,20 +180,28 @@ function loadVms() {
                 var vms = JSON.parse(this.responseText);
                 var html = '<tr>\n' +
                     '        <th>Vm name</th>\n' +
-                    '        <th>getVmInfo</th>\n' +
+                    '        <th>Start Vm</th>\n' +
                     '    </tr>';
                 for (var i = 0; i < vms.length; i++) {
                     var vmm = vms[i];
                     console.log(vmm);
                     html = html + 
-                        '        <td>' + vmm.name + '</td>\n' +
-                        '        <td><button onclick="getVmInfo(\'' + vmm.id + '\')">getVmInfo</button></td></tr>';
+                        '        <tr>' +
+                        '        <td onclick="getVmInfo(\'' + vmm.id + '\')" id=' + vmm.id + '>' + vmm.name + '</td>\n' +
+                        '        <td><button onclick="startVm(\'' + vmm.id + '\')">start VM</button></td>'+
+                        '        </tr>';
 
                 }
                 document.getElementById("vmList").innerHTML = html;
             }
         };
         xhttp.open("GET", "http://localhost:8080/ovmm_commands/getServerInfo?serverID=" +vserverid, true);
+        xhttp.send();
+    }
+    
+    function startVm(vmId){
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "http://localhost:8080/ovmm_commands/startVm?vmId=" +vmId, true);
         xhttp.send();
     }
     

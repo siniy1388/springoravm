@@ -14,17 +14,20 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class sshConvertUtils implements sshUtils {
+
     
+            
     @Override
     public JSONObject strToJson(String bufline){
         int iid = bufline.indexOf("id");
         int inm = bufline.indexOf("name");
         int len = bufline.length();   
-        String tmpline = "{" + "id:"+ bufline.substring(iid +3, inm - 2)
-                    .replace(":", "-")+
-            ",name:" + bufline.substring(inm + 5, len).replace(":", "-")+"}";
+        String tmpline = "{" + "id:"+ "\""+bufline.substring(iid +3, inm - 2)
+                    +"\""+
+            ",name:" + "\""+bufline.substring(inm + 5, len)+"\""+"}";
         JSONObject ovmmComndJsObj = new JSONObject(tmpline);
-        return ovmmComndJsObj;        
+        return ovmmComndJsObj;       
+//        .replace(":", "-")
     }
     
     @Override
@@ -32,8 +35,8 @@ public class sshConvertUtils implements sshUtils {
         int iid = bufline.indexOf("=");
         int inm = bufline.indexOf("[");
         int len = bufline.length();   
-        String tmpline = "{" + "id:"+ bufline.substring(iid +2, inm - 2) +
-            ",name:" + bufline.substring(inm + 1, len-1)+"}";
+        String tmpline = "{" + "id:"+ "\""+bufline.substring(iid +2, inm - 2)+"\"" +
+            ",name:" + "\""+ bufline.substring(inm + 1, len-1)+"\""+"}";
         JSONObject ovmmComndJsObj = new JSONObject(tmpline);
         return ovmmComndJsObj;        
     }
@@ -41,11 +44,17 @@ public class sshConvertUtils implements sshUtils {
     @Override
     public JSONObject infoToJson(String bufline){
         JSONObject res = null;
+        testIP vtestIP = new testIP();
+        if (vtestIP.validate(bufline)){
+            String tmpline = "{\"IP Address\":\""+ bufline + "\"}";
+            res = new JSONObject(tmpline);
+        }else{
         try{
             String tmpline = "{\"" + bufline.substring(0 , bufline.indexOf("=")).trim() + "\":\""+
                         bufline.substring(bufline.indexOf("=")+1 , bufline.length()).trim() + "\"}";
             res = new JSONObject(tmpline);
         }catch(JSONException ex){
+        }
         }
         
         return res;

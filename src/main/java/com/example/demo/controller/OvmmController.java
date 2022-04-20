@@ -5,9 +5,7 @@
 
 package com.example.demo.controller;
 
-import com.example.demo.dto.OvmmComndDto;
 import com.example.demo.service.OvmmComndService;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,6 +44,11 @@ public class OvmmController {
     @GetMapping("/getVmInfo")
     public StringBuilder getVmInfo(@RequestParam String vmId) {
         return ovmmcomndservice.getVmInfo(vmId);
+    }
+    
+    @GetMapping("/startVm")
+    public StringBuilder startVm(@RequestParam String vmId) {
+        return ovmmcomndservice.startVm(vmId);
     }
     
 }

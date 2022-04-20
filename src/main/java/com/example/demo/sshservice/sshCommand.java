@@ -159,7 +159,54 @@ public class sshCommand {
                     buffer.append("{\"Data\":[");
                     //buffer.append(",");
                 }else{
-                    System.out.println(buf);
+//                    System.out.println(buf);
+                    buffer.append(sshutils.infoToJson(buf));
+                    buffer.append(",");
+                }
+            }
+            
+           } 
+       }
+       buffer.setLength(buffer.length()-1);
+       buffer.append("]");
+       buffer.append("}");
+       buffer.append("]");
+       channel.disconnect();
+        return buffer;
+   }
+    
+    public StringBuilder startVm(String vmID) throws JSchException, IOException, ParseException {
+       String command = "start vm id=" + vmID;
+       ((ChannelExec) channel).setCommand(command);
+       channel.setInputStream(null);
+       ((ChannelExec) channel).setErrStream(System.err);
+       channel.connect();
+       InputStream in = channel.getInputStream();
+       reader = new BufferedReader(new InputStreamReader(in,
+               Charset.forName(charset)));
+       String buf;
+       Boolean isdata = false;
+       StringBuilder buffer = new StringBuilder();
+       buffer.append("[");
+       while ((buf = reader.readLine()) != null) {
+           if (!buf.contains("OVM") && (buf.length() != 0)){
+            if (buf.contains("Command") || (buf.contains("Status") && !isdata)
+               || buf.contains("Time") ){
+                String tmpline = "{\"" + buf.substring(0 , buf.indexOf(":")).trim() + "\":\""+
+                        buf.substring(buf.indexOf(":")+1 , buf.length()).trim() + "\"}";
+                //String tmpline = "{" + buf + "}";
+                //System.out.println(tmpline);
+                JSONObject json = new JSONObject(tmpline);
+                //System.out.println(json);
+                buffer.append(json);
+                buffer.append(",");
+            }else{
+                if (buf.contains("Data")){
+                    isdata = true;
+                    buffer.append("{\"Data\":[");
+                    //buffer.append(",");
+                }else{
+//                    System.out.println(buf);
                     buffer.append(sshutils.infoToJson(buf));
                     buffer.append(",");
                 }
