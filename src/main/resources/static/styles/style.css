@@ -38,7 +38,10 @@
     border-top: none;
 }
 .div_inline {
+ float: left;
  display:inline-block;
+ padding-right: 10px; 
+ padding-left: 10px;
 }
 
 .div_inline img {
@@ -46,8 +49,14 @@
 }
 .table_style {
     border: 1px solid;
-    width:100px; 
-    height:100px;
+    width:50%; 
+    height:300px;
+    border-collapse: collapse;
+}
+.table_style_child {
+    border: 1px solid;
+    width:50%; 
+    height:300px;
     border-collapse: collapse;
 }
 .clickRowStyl{
@@ -55,3 +64,9 @@
 }
 /*.ant-table-tbody.clickRowStyl:hover>td
   background-color #00b4ed*/
+
+.wrapper {
+  max-width: 960px; 
+  padding-right: 10px; 
+  padding-left: 10px;
+}
