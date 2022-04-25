@@ -39,11 +39,11 @@
 
 .div_inline {
  display: inline-block;
- display:inline-block;
- width:50%; 
+ /*display:inline-block;*/
+/* width:50%; 
  height:300px;
- padding-right: 10px; 
- padding-left: 10px;
+ padding-right: 10px; */
+ /*padding-left: 10px;*/
 }
 
 .div_inline img {
@@ -51,13 +51,13 @@
 }
 .table_style {
     border: 1px solid;
-    width:50%; 
+    width:100%; 
     height:300px;
     border-collapse: collapse;
 }
 .table_style_child {
     border: 1px solid;
-    width:50%; 
+    width:100%; 
     height:300px;
     border-collapse: collapse;
 }
@@ -67,12 +67,12 @@
 /*.ant-table-tbody.clickRowStyl:hover>td
   background-color #00b4ed*/
 
-.wrapper {
-  display: flex;
-    max-width: 960px;
-    padding-right: 10px;
-    padding-left: 10px;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: stretch;
+.wrapper_panel {
+  display: grid;
+  justify-content: space-around;
+  grid-auto-rows: minmax(min-content, max-content);
+  grid-template-columns: 3fr 1fr 6fr;
+  border: 1px solid;
+  width: 98.2vw;
+  height: 300px;
 }
