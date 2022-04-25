@@ -21,7 +21,7 @@
 <!-- Tab content -->
 <div id="Servers" class="tabcontent">
   <h3>Servers and VMs</h3>
-  <div class="wrapper_panel">
+<!--  <div class="wrapper_panel">
    <div class="div_inline">
        <table id="servList" class="table_style"> </table>
    </div>
@@ -32,10 +32,61 @@
     <table id="vmList" class="table_style_child"></table>
   </div>
       
-<!--  <div class="div_inline">
+  <div class="div_inline">
     <table id="vmInfo" class="table_style"></table>
-  </div>-->
-</div>
+  </div>
+</div>-->
+<Grid columns={1} relaxed='very' stackable >
+ <Grid.Row>
+ <Grid.Column>
+  <div> 
+    <Grid columns={1} relaxed='very' stackable >
+     <Grid.Row>
+      <Grid.Column>
+           <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-secondary">Left</button>
+                <button type="button" class="btn btn-secondary">Middle</button>
+                <button type="button" class="btn btn-secondary">Right</button>
+            </div>
+      </Grid.Column>
+     </Grid.Row>   
+     <Grid.Row>
+      <Grid.Column>
+       <div class="div_inline">
+            <table id="servList" class="table_style"> </table>
+       </div>
+      </Grid.Column>
+     </Grid.Row> 
+    </Grid>    
+    </div>
+ </Grid.Column>
+ <Divider vertical>Or</Divider>
+ <Grid.Column>
+    <div>  
+    <Grid columns={1} relaxed='very' stackable >
+     <Grid.Row>
+      <Grid.Column>
+           <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-secondary">Left</button>
+                <button type="button" class="btn btn-secondary">Middle</button>
+                <button type="button" class="btn btn-secondary">Right</button>
+            </div>
+      </Grid.Column>
+     </Grid.Row>   
+     <Grid.Row>
+      <Grid.Column>
+        <div class="div_inline_child">
+            <table id="vmList" class="table_style_child"></table>
+        </div>
+      </Grid.Column>
+     </Grid.Row> 
+    </Grid>    
+    </div>
+ </Grid.Column>
+ </Grid.Row>
+</Grid>
+
+    
 </div>
 
 <div id="Repos" class="tabcontent">
