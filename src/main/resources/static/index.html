@@ -36,53 +36,38 @@
     <table id="vmInfo" class="table_style"></table>
   </div>
 </div>-->
-<Grid columns={1} relaxed='very' stackable >
+<Grid columns={2} divided="true" relaxed='very' stackable >
  <Grid.Row>
- <Grid.Column>
-  <div> 
-    <Grid columns={1} relaxed='very' stackable >
-     <Grid.Row>
-      <Grid.Column>
-           <div class="btn-group" role="group" aria-label="Basic example">
+   <Grid.Column width={3}>
+       <div>
+           <div  role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-secondary">Left</button>
                 <button type="button" class="btn btn-secondary">Middle</button>
                 <button type="button" class="btn btn-secondary">Right</button>
             </div>
-      </Grid.Column>
-     </Grid.Row>   
-     <Grid.Row>
-      <Grid.Column>
-       <div class="div_inline">
+       </div>
+   </Grid.Column>
+   <Grid.Column width={3}>
+       <div>
+        <div role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-secondary">Left</button>
+                <button type="button" class="btn btn-secondary">Middle</button>
+                <button type="button" class="btn btn-secondary">Right</button>
+            </div>
+       </div>    
+  </Grid.Column>
+</Grid.Row> 
+<Grid.Row>
+   <Grid.Column>
+           <div class="div_inline">
             <table id="servList" class="table_style"> </table>
        </div>
-      </Grid.Column>
-     </Grid.Row> 
-    </Grid>    
-    </div>
- </Grid.Column>
- <Divider vertical>Or</Divider>
- <Grid.Column>
-    <div>  
-    <Grid columns={1} relaxed='very' stackable >
-     <Grid.Row>
-      <Grid.Column>
-           <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary">Left</button>
-                <button type="button" class="btn btn-secondary">Middle</button>
-                <button type="button" class="btn btn-secondary">Right</button>
-            </div>
-      </Grid.Column>
-     </Grid.Row>   
-     <Grid.Row>
-      <Grid.Column>
-        <div class="div_inline_child">
+   </Grid.Column>
+   <Grid.Column>
+          <div class="div_inline_child">
             <table id="vmList" class="table_style_child"></table>
         </div>
-      </Grid.Column>
-     </Grid.Row> 
-    </Grid>    
-    </div>
- </Grid.Column>
+   </Grid.Column>
  </Grid.Row>
 </Grid>
 
