@@ -1,3 +1,5 @@
+var selectedVmId ;
+var selectedVmInfo;
 function openTab(evt, cityName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
@@ -149,6 +151,7 @@ function loadVms() {
     
     function getVmInfo(vmId) {
         var xhttp = new XMLHttpRequest();
+        console.log("fadfadfs");
         xhttp.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
                 var vminfo = this.responseText;
@@ -164,7 +167,15 @@ function loadVms() {
                         '</tr>';
 
                // }
-                document.getElementById("vmInfo").innerHTML = html;
+//                document.getElementById("vmInfo").innerHTML = html;
+var modal = $modal({
+  title: 'Текст заголовка',
+  content: '<p>Содержимое модального окна...</p>',
+  footerButtons: [
+    { class: 'btn btn__cancel', text: 'Отмена', handler: 'modalHandlerCancel' },
+    { class: 'btn btn__ok', text: 'ОК', handler: 'modalHandlerOk' }
+  ]
+});
             }
         };
         xhttp.open("GET", "http://localhost:8080/ovmm_commands/getVmInfo?vmId="+vmId, true);
@@ -187,8 +198,9 @@ function loadVms() {
                     console.log(vmm);
                     html = html + 
                         '        <tr>' +
-                        '        <td onclick="getVmInfo(\'' + vmm.id + '\')" id=' + vmm.id + '>' + vmm.name + '</td>\n' +
-                        '        <td><button onclick="startVm(\'' + vmm.id + '\')">start VM</button></td>'+
+//                        '        <td onclick="getVmInfo(\'' + vmm.id + '\')" id=' + vmm.id + '>' + vmm.name + '</td>\n' +
+                        '        <td onclick="saveSelectedVmId(\'' + vmm.id + '\')" id=' + vmm.id + '>' + vmm.name + '</td>\n' +
+//                        '        <td><button onclick="startVm(\'' + vmm.id + '\')">start VM</button></td>'+
                         '        </tr>';
 
                 }
@@ -205,6 +217,9 @@ function loadVms() {
         xhttp.send();
     }
     
+    function saveSelectedVmId(vmId){
+        selectedVmId = vmId;
+    }
   
     
   

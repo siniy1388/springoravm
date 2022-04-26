@@ -2,7 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <link rel="stylesheet" href="styles/style.css" type="text/css"/>
+    <link rel="stylesheet" href="styles/modal.css" type="text/css"/>
     <script  src="js/jsindex.js">  </script>
+    <script src="modal.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>VM Manager</title>
 
@@ -24,14 +26,13 @@
 
   <div class="wrapper_panel">
       <div class="box1">
-          <button type="button" class="btn btn-secondary">Left1</button>
-                <button type="button" class="btn btn-secondary">Middle1</button>
-                <button type="button" class="btn btn-secondary">Right1</button>
+          <button type="button" class="btn btn-secondary">Create VM</button>
+          <button type="button" class="btn btn-secondary">Server Info</button>
       </div>
    <div class="box2">
-   <button type="button" class="btn btn-secondary">Left1</button>
-                <button type="button" class="btn btn-secondary">Middle1</button>
-                <button type="button" class="btn btn-secondary">Right1</button>
+                <button type="button" class="btn btn-secondary" onclick="startVm(selectedVmId)">Start Vm</button>
+                <button type="button" class="btn btn-secondary" onclick="getVmInfo(selectedVmId)">Vm Info</button>
+                <button type="button" class="btn btn-secondary">Stop Vm</button>
    </div>
       <div class="box3">
           <table id="servList" class="table_style"> </table>
