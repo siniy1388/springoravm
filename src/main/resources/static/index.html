@@ -21,57 +21,37 @@
 <!-- Tab content -->
 <div id="Servers" class="tabcontent">
   <h3>Servers and VMs</h3>
-<!--  <div class="wrapper_panel">
-   <div class="div_inline">
-       <table id="servList" class="table_style"> </table>
-   </div>
-   <div class="div_inline">
-       
-   </div>
-  <div class="div_inline">
-    <table id="vmList" class="table_style_child"></table>
-  </div>
-      
-  <div class="div_inline">
-    <table id="vmInfo" class="table_style"></table>
-  </div>
-</div>-->
-<Grid columns={2} divided="true" relaxed='very' stackable >
+
+<Grid columns={2} divided  >
  <Grid.Row>
-   <Grid.Column width={3}>
-       <div>
-           <div  role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary">Left</button>
-                <button type="button" class="btn btn-secondary">Middle</button>
-                <button type="button" class="btn btn-secondary">Right</button>
-            </div>
-       </div>
+   <Grid.Column >
+           <div >
+                <button type="button" class="btn btn-secondary">Left1</button>
+<!--                <button type="button" class="btn btn-secondary">Middle1</button>
+                <button type="button" class="btn btn-secondary">Right1</button>-->
+           </div>
    </Grid.Column>
-   <Grid.Column width={3}>
-       <div>
-        <div role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary">Left</button>
-                <button type="button" class="btn btn-secondary">Middle</button>
-                <button type="button" class="btn btn-secondary">Right</button>
+   <Grid.Column >
+        <div >
+                <button type="button" class="btn btn-secondary">Left2</button>
+<!--                <button type="button" class="btn btn-secondary">Middle2</button>
+                <button type="button" class="btn btn-secondary">Right2</button>-->
             </div>
-       </div>    
-  </Grid.Column>
+   </Grid.Column>
 </Grid.Row> 
 <Grid.Row>
    <Grid.Column>
-           <div class="div_inline">
+       <div class="div_inline">
             <table id="servList" class="table_style"> </table>
        </div>
    </Grid.Column>
    <Grid.Column>
-          <div class="div_inline_child">
+        <div class="div_inline_child">
             <table id="vmList" class="table_style_child"></table>
         </div>
    </Grid.Column>
  </Grid.Row>
 </Grid>
-
-    
 </div>
 
 <div id="Repos" class="tabcontent">
