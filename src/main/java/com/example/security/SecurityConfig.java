@@ -19,55 +19,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  *
  * @author oleg
  */
-//@EnableWebSecurity
-//@Configuration
-//public class SecurityConfig extends WebSecurityConfigurerAdapter{
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return NoOpPasswordEncoder.getInstance();
-//    }
-//    @Override
-//    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication()
-//                .withUser("u1")
-//                   .password("p1")
-//                   .authorities("ROLE_USER")
-//                .and()
-//                .withUser("u2")
-//                   .password("p2")
-//                   .authorities("ROLE_USER");
-//    }
-//    
-////     @Override
-////    protected void configure(HttpSecurity http) throws Exception {
-////        http
-////            .authorizeRequests()
-////                .antMatchers("/", "/home").permitAll()
-////                .anyRequest().authenticated();
-////        http
-////            .formLogin()
-////                .loginPage("/login")
-////                .permitAll()
-////                .and()
-////            .logout()
-////                .permitAll();
-////    }
-//
-////    @Configuration
-////    protected static class AuthenticationConfiguration extends
-////            GlobalAuthenticationConfigurerAdapter {
-////
-////        @Override
-////        public void init(AuthenticationManagerBuilder auth) throws Exception {
-////            auth
-////                    .inMemoryAuthentication()
-////                    .withUser("user").password("password").roles("USER");
-////        }
-////
-////    }
-//    
-//}
-
 
 @Configuration
 @EnableWebSecurity
