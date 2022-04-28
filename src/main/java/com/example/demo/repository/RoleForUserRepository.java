@@ -12,12 +12,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author oleg
  */
 public interface RoleForUserRepository extends JpaRepository<Vroleforusers, Integer> {
-//    Vroleforusers findByLogin(String login);
-//    
-//    Vroleforusers findByRoleNm(String rolenm);
-//    
-//    Vroleforusers findByRoleid(Integer roleid);
-//    
-//    Vroleforusers findByUserid(Integer userid);
+    Vroleforusers findByLogin(String login);
+    
+    Vroleforusers findByRoleNm(String rolenm);
+    
+    Vroleforusers findByRoleid(Integer roleid);
+    
+    Vroleforusers findByUserid(Integer userid);
     
 }

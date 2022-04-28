@@ -5,6 +5,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.RoleForUserDto;
+import com.example.demo.entity.Vroleforusers;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,9 +23,27 @@ import java.util.logging.Logger;
  */
 @AllArgsConstructor
 @Service
-public class DefaultRoleForUserService {
+public class DefaultRoleForUserService implements RoleForUserService{
     private final RoleForUserRepository roleforuserrep;
     private final RoleForUserConverter roleforuserconverter;
+    
+   @Override
+    public RoleForUserDto findByLogin(String login) {
+        Vroleforusers roleusers = roleforuserrep.findByLogin(login);
+        if (roleusers != null) {
+            return roleforuserconverter.fromRoleForUserToRoleForUserDto(roleusers);
+        }
+        return null;
+    }
+    
+    @Override
+    public RoleForUserDto findByRoleNm(String rolenm) {
+        Vroleforusers roleusers = roleforuserrep.findByRoleNm(rolenm);
+        if (roleusers != null) {
+            return roleforuserconverter.fromRoleForUserToRoleForUserDto(roleusers);
+        }
+        return null;
+    }
     
     @Override
     public List<RoleForUserDto> findAll() {
@@ -32,6 +51,24 @@ public class DefaultRoleForUserService {
                 .stream()
                 .map(roleforuserconverter::fromRoleForUserToRoleForUserDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public RoleForUserDto findByRoleid(Integer roleid) {
+        Vroleforusers roleusers = roleforuserrep.findByRoleid(roleid);
+        if (roleusers != null) {
+            return roleforuserconverter.fromRoleForUserToRoleForUserDto(roleusers);
+        }
+        return null;
+    }
+
+    @Override
+    public RoleForUserDto findByUserid(Integer userid) {
+        Vroleforusers roleusers = roleforuserrep.findByUserid(userid);
+        if (roleusers != null) {
+            return roleforuserconverter.fromRoleForUserToRoleForUserDto(roleusers);
+        }
+        return null;
     }
     
 }
