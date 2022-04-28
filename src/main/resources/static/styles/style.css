@@ -60,6 +60,7 @@
     height:300px;
     border-collapse: collapse;
     align-content: top;
+    background: #00FFFF;
 }
 .table_style_child {
     border: 1px solid;
