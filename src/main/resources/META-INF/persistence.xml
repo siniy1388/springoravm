@@ -6,6 +6,7 @@
     <class>com.example.demo.entity.UserVm</class>
     <class>com.example.demo.entity.Commands</class>
     <class>com.example.demo.entity.Roles</class>
+    <class>com.example.demo.entity.Vroleforusers</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://192.168.0.34:5432/prjava"/>
       <property name="javax.persistence.jdbc.user" value="prjava"/>

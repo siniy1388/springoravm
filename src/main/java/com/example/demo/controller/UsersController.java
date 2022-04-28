@@ -35,7 +35,6 @@ public class UsersController {
 
     @PostMapping("/save")
     public UsersDto saveUsers(@RequestBody UsersDto usersDto) throws ValidationException {
-        System.out.println("Тута!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         log.info("Handling save users: " + usersDto);
         return usersService.saveUser(usersDto);
     }
