@@ -25,25 +25,37 @@ public class sshConvertUtils implements sshUtils {
         String tmpline = "{" + "id:"+ "\""+bufline.substring(iid +3, inm - 2)
                     +"\""+
             ",name:" + "\""+bufline.substring(inm + 5, len)+"\""+"}";
-        JSONObject ovmmComndJsObj = new JSONObject(tmpline);
+        JSONObject ovmmComndJsObj;
+        try{
+            ovmmComndJsObj = new JSONObject(tmpline);
+        }catch(JSONException joe){
+            ovmmComndJsObj = new JSONObject("{}");
+        }
+        
         return ovmmComndJsObj;       
 //        .replace(":", "-")
     }
     
     @Override
     public JSONObject strVmToJson(String bufline){
+        JSONObject ovmmComndJsObj;
         int iid = bufline.indexOf("=");
         int inm = bufline.indexOf("[");
         int len = bufline.length();   
         String tmpline = "{" + "id:"+ "\""+bufline.substring(iid +2, inm - 2)+"\"" +
             ",name:" + "\""+ bufline.substring(inm + 1, len-1)+"\""+"}";
-        JSONObject ovmmComndJsObj = new JSONObject(tmpline);
+        try{
+            ovmmComndJsObj = new JSONObject(tmpline);
+        }catch(JSONException joe){
+            ovmmComndJsObj = new JSONObject("{}");
+        }
+        
         return ovmmComndJsObj;        
     }
     
     @Override
     public JSONObject infoToJson(String bufline){
-        JSONObject res = null;
+        JSONObject res;
         testIP vtestIP = new testIP();
         if (vtestIP.validate(bufline)){
             String tmpline = "{\"IP Address\":\""+ bufline + "\"}";
@@ -54,6 +66,7 @@ public class sshConvertUtils implements sshUtils {
                         bufline.substring(bufline.indexOf("=")+1 , bufline.length()).trim() + "\"}";
             res = new JSONObject(tmpline);
         }catch(JSONException ex){
+            res = new JSONObject("{}");
         }
         }
         

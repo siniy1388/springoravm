@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import org.apache.tomcat.util.json.*;
 import org.json.JSONObject;
 import com.example.demo.utils.sshConvertUtils;
+import java.util.regex.Pattern;
 
 
 
@@ -37,8 +38,13 @@ public class sshCommand {
     private Session session;
     String charset = "UTF-8";
     BufferedReader reader = null;
+    BufferedReader reader1 = null;
     Channel channel = null;
     JSONParser parser;
+//    Pattern COMMAND = Pattern.compile("Command:\\s", Pattern.CASE_INSENSITIVE);
+//    Pattern STATUS = Pattern.compile("Status:\\s", Pattern.CASE_INSENSITIVE);
+//    Pattern TIME = Pattern.compile("Time:\\s", Pattern.CASE_INSENSITIVE);
+//    Pattern DATA = Pattern.compile("Data:\\s", Pattern.CASE_INSENSITIVE);
     
        
     
@@ -50,7 +56,6 @@ public class sshCommand {
        session.connect();
        channel = session.openChannel("exec");
        sshutils = new sshConvertUtils();
-       
    }
     
     public sshCommand(){
@@ -78,9 +83,9 @@ public class sshCommand {
        reader = new BufferedReader(new InputStreamReader(in,
                Charset.forName(charset)));
        String buf;
-       System.out.println("OutPutResult:"+"\n");
+       // System.out.println("OutPutResult:"+"\n");
        StringBuilder buffer = new StringBuilder();
-       //String ttt;
+
        buffer.append("[");
        while ((buf = reader.readLine()) != null) {
            //System.out.println(buf);
@@ -164,7 +169,6 @@ public class sshCommand {
                     buffer.append(",");
                 }
             }
-            
            } 
        }
        buffer.setLength(buffer.length()-1);
@@ -222,5 +226,44 @@ public class sshCommand {
         return buffer;
    }
     
-    
+    public StringBuilder getListCommand(String lcommand) throws JSchException, IOException, ParseException {
+
+       String command = "list " + lcommand ;
+       ((ChannelExec) channel).setCommand(command);
+       channel.setInputStream(null);
+       ((ChannelExec) channel).setErrStream(System.err);
+       channel.connect();
+       InputStream in = channel.getInputStream();
+       reader = new BufferedReader(new InputStreamReader(in,
+               Charset.forName(charset)));
+       String buf;
+       StringBuilder buffer = new StringBuilder();
+       Boolean isdata = false;
+       buffer.append("[");
+       while ((buf = reader.readLine()) != null) {
+          if (!buf.contains("OVM") && (buf.length() != 0)){
+            if ((buf.contains("Command") || buf.contains("Status") || buf.contains("Time")) && !isdata){
+                String tmpline = "{\"" + buf.substring(0 , buf.indexOf(":")).trim() + "\":\""+
+                        buf.substring(buf.indexOf(":")+1 , buf.length()).trim() + "\"}";
+                JSONObject json = new JSONObject(tmpline);
+                buffer.append(json);
+                buffer.append(",");
+            }else{
+                if (buf.contains("Data") && !isdata){
+                    isdata = true;
+                    buffer.append("{\"Data\":[");
+                }else{
+                    buffer.append(sshutils.strVmToJson(buf));
+                    buffer.append(",");
+                }
+            }
+            
+           } 
+       }
+       buffer = new StringBuilder(buffer.toString()
+                   .substring(0,buffer.length()-1));
+       buffer.append("]");
+       channel.disconnect();
+       return buffer;
+   }
 }
