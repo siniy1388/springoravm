@@ -1,5 +1,6 @@
 var selectedVmId ;
 var selectedVmInfo;
+var selectedRepos;
 function openTab(evt, cityName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
@@ -15,7 +16,7 @@ function openTab(evt, cityName) {
     switch (cityName) { 
         case 'Servers': 
             loadServ();
-            loadUsers();
+           // loadUsers();
             break;
         case 'Repos':    
             loadRepos(); 
@@ -185,8 +186,6 @@ var modal = $modal({
     }
     
     function getServerVms(vserverid){
-//        console.log(vserverid);
-//        alert("Hello");
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
@@ -203,6 +202,31 @@ var modal = $modal({
 //                        '        <td onclick="getVmInfo(\'' + vmm.id + '\')" id=' + vmm.id + '>' + vmm.name + '</td>\n' +
                         '        <td onclick="saveSelectedVmId(\'' + vmm.id + '\')" id=' + vmm.id + '>' + vmm.name + '</td>\n' +
 //                        '        <td><button onclick="startVm(\'' + vmm.id + '\')">start VM</button></td>'+
+                        '        </tr>';
+
+                }
+                document.getElementById("vmList").innerHTML = html;
+            }
+        };
+        xhttp.open("GET", "http://localhost:8080/ovmm_commands/getServerInfo?serverID=" +vserverid, true);
+        xhttp.send();
+    }
+    
+     function getReposInfo(vreposid){
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                var vms = JSON.parse(this.responseText);
+                var html = '<tr>\n' +
+                    '        <th>Repo name</th>\n' +
+                    '        <th>Start Vm</th>\n' +
+                    '    </tr>';
+                for (var i = 0; i < vms.length; i++) {
+                    var vmm = vms[i];
+                    console.log(vmm);
+                    html = html + 
+                        '        <tr>' +
+                        '        <td onclick="saveSelectedVmId(\'' + vmm.id + '\')" id=' + vmm.id + '>' + vmm.name + '</td>\n' +
                         '        </tr>';
 
                 }
