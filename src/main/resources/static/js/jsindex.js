@@ -18,11 +18,14 @@ function openTab(evt, cityName) {
             loadUsers();
             break;
         case 'Repos':    
-            loadVms(); 
+            loadRepos(); 
             break;
         case 'Network':
-            loadCommands();
-            break;
+            loadNetwork(); 
+            break
+        case 'Storage':
+            loadStorage(); 
+            break;    
             
 }
 }
@@ -229,6 +232,73 @@ var modal = $modal({
 //        xhttp.open("GET", "http://localhost:8080/userRole/findAll", true);
 //        xhttp.send();
     }
-  
     
+    function loadRepos() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                var servers = JSON.parse(this.responseText);
+                var html = '<tr >\n' +
+                    '        <th>Repository name</th>\n' +
+                    '    </tr>';
+                for (var i = 0; i < servers.length; i++) {
+                    var server = servers[i];
+                    console.log(server);
+                    html = html + 
+                        '        <tr onclick="getServerVms(\'' +server.id+ '\')"><td id=' + server.id + '>' + server.name + '</td>\n' +
+                        '   </tr>';
+
+                }
+                document.getElementById("reposList").innerHTML = html;
+            }
+        };
+        xhttp.open("GET", "http://localhost:8080/ovmm_commands/ExecComndDto?command=list repository", true);
+        xhttp.send();
+    }
+    
+    function loadNetwork() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                var servers = JSON.parse(this.responseText);
+                var html = '<tr >\n' +
+                    '        <th>Network name</th>\n' +
+                    '    </tr>';
+                for (var i = 0; i < servers.length; i++) {
+                    var server = servers[i];
+                    console.log(server);
+                    html = html + 
+                        '        <tr onclick="getServerVms(\'' +server.id+ '\')"><td id=' + server.id + '>' + server.name + '</td>\n' +
+                        '   </tr>';
+
+                }
+                document.getElementById("networkList").innerHTML = html;
+            }
+        };
+        xhttp.open("GET", "http://localhost:8080/ovmm_commands/ExecComndDto?command=list network", true);
+        xhttp.send();
+    }
+  
+    function loadStorage() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                var servers = JSON.parse(this.responseText);
+                var html = '<tr >\n' +
+                    '        <th>Storage name</th>\n' +
+                    '    </tr>';
+                for (var i = 0; i < servers.length; i++) {
+                    var server = servers[i];
+                    console.log(server);
+                    html = html + 
+                        '        <tr onclick="getServerVms(\'' +server.id+ '\')"><td id=' + server.id + '>' + server.name + '</td>\n' +
+                        '   </tr>';
+
+                }
+                document.getElementById("storageList").innerHTML = html;
+            }
+        };
+        xhttp.open("GET", "http://localhost:8080/ovmm_commands/ExecComndDto?command=list storagearray", true);
+        xhttp.send();
+    }
   

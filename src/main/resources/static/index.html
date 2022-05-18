@@ -56,34 +56,52 @@
                 <button type="button" class="btn btn-secondary">Stop Vm</button>
    </div>
       <div class="box3">
-          <table id="servList" class="table_style"> </table>
+          <table id="reposList" class="table_style"> </table>
       </div>
    <div class="box4">
-          <table id="vmList" class="table_style_child"></table>
+          <table id="vmList1" class="table_style_child"></table>
    </div>
 </div>
 </div>
-
-
-
-
 
 <div id="Network" class="tabcontent">commandList
-   <div>
-<!--  <table id="vmsList" style="width:30%; height:40%"> </table>-->
-  <div class="div_inline">
-    <table id="commandList" class="table_style"> </table>
+   <div class="wrapper_panel">
+      <div class="box1">
+          <button type="button" class="btn btn-secondary">Create VM</button>
+          <button type="button" class="btn btn-secondary">Server Info</button>
+      </div>
+   <div class="box2">
+                <button type="button" class="btn btn-secondary" onclick="startVm(selectedVmId)">Start Vm</button>
+                <button type="button" class="btn btn-secondary" onclick="getVmInfo(selectedVmId)">Vm Info</button>
+                <button type="button" class="btn btn-secondary">Stop Vm</button>
    </div>
-  <!--<input name="parentList" type="text" style="width:30%; height:200px" value="" size="1" />-->
-<!--  <div class="div_inline">
-    <table id="usersList" style="table_style"></table>
-  </div>-->
+      <div class="box3">
+          <table id="networkList" class="table_style"> </table>
+      </div>
+   <div class="box4">
+          <table id="vmList2" class="table_style_child"></table>
+   </div>
 </div>
 </div>
 
 <div id="Storage" class="tabcontent">
-  <h3>Storage</h3>
-  <p>StorageStorageStorageStorageStorage.</p>
+  <div class="wrapper_panel">
+      <div class="box1">
+          <button type="button" class="btn btn-secondary">Create VM</button>
+          <button type="button" class="btn btn-secondary">Server Info</button>
+      </div>
+   <div class="box2">
+                <button type="button" class="btn btn-secondary" onclick="startVm(selectedVmId)">Start Vm</button>
+                <button type="button" class="btn btn-secondary" onclick="getVmInfo(selectedVmId)">Vm Info</button>
+                <button type="button" class="btn btn-secondary">Stop Vm</button>
+   </div>
+      <div class="box3">
+          <table id="storageList" class="table_style"> </table>
+      </div>
+   <div class="box4">
+          <table id="vmList3" class="table_style_child"></table>
+   </div>
+</div>
 </div>
 
 
